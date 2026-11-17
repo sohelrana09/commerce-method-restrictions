@@ -1,0 +1,90 @@
+# The [pre-app-build] hooks are auto-generated. Do not remove or manually edit.
+hooks:
+  pre-app-build: EXTENSION=extensibility/1 npx aio-commerce-lib-app hooks pre-app-build
+  post-app-deploy: EXTENSION=extensibility/1 npx aio-commerce-lib-app hooks post-app-deploy
+
+operations:
+  # These worker processes definitions are auto-generated. Do not remove or manually edit.
+  workerProcess:
+    - type: action
+      impl: app-management/app-config
+    - type: action
+      impl: app-management/association
+    - type: action
+      impl: app-management/installation
+
+runtimeManifest:
+  packages:
+    # This package definition is auto-generated. Do not remove or manually edit.
+    app-management:
+      license: Apache-2.0
+      actions:
+        app-config:
+          function: .generated/actions/app-management/app-config.js
+          web: yes
+          runtime: nodejs:24
+          annotations:
+            final: true
+            require-adobe-auth: true
+        association:
+          function: .generated/actions/app-management/association.js
+          web: yes
+          runtime: nodejs:24
+          annotations:
+            final: true
+            require-adobe-auth: true
+            include-ims-credentials: true
+        installation:
+          function: .generated/actions/app-management/installation.js
+          web: yes
+          runtime: nodejs:24
+          annotations:
+            final: true
+            require-adobe-auth: true
+            include-ims-credentials: true
+          limits:
+            timeout: 600000
+      inputs:
+        LOG_LEVEL: $LOG_LEVEL
+    method-restrictions:
+      license: Apache-2.0
+      actions:
+        # Commerce webhooks (webhooks in app.commerce.config.ts). Public endpoints: each request
+        # must carry a valid Commerce webhook signature (see src/common/signature.js), and raw-http
+        # keeps the body byte-for-byte so the signature can be checked.
+        filter-payment:
+          function: actions/filter-payment/index.js
+          web: "yes"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            COMMERCE_WEBHOOKS_PUBLIC_KEY: $COMMERCE_WEBHOOKS_PUBLIC_KEY
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            require-adobe-auth: false
+            raw-http: true
+            include-ims-credentials: true
+            final: true
+        filter-shipping:
+          function: actions/filter-shipping/index.js
+          web: "yes"
+          runtime: nodejs:24
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            COMMERCE_WEBHOOKS_PUBLIC_KEY: $COMMERCE_WEBHOOKS_PUBLIC_KEY
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+          annotations:
+            require-adobe-auth: false
+            raw-http: true
+            include-ims-credentials: true
+            final: true

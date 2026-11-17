@@ -1,0 +1,26 @@
+[
+  {
+    "default": true,
+    "label": "Apply payment and shipping method restrictions",
+    "name": "restrictionsEnabled",
+    "type": "boolean"
+  },
+  {
+    "default": "checkmo, banktransfer, cashondelivery, purchaseorder, free, braintree, paypal_express",
+    "label": "Payment method codes your store offers, comma-separated (used by 'allow only' rules and the Admin)",
+    "name": "paymentMethods",
+    "type": "text"
+  },
+  {
+    "default": "flatrate_flatrate, freeshipping_freeshipping, tablerate_bestway, ups_GND, usps_1, fedex_FEDEX_GROUND, dhl_P",
+    "label": "Shipping methods your store offers as carrier_method, comma-separated (used by 'allow only' rules and the Admin)",
+    "name": "shippingMethods",
+    "type": "text"
+  },
+  {
+    "default": "UTC",
+    "label": "Time zone for day and time conditions (IANA name, for example Europe/London)",
+    "name": "timezone",
+    "type": "text"
+  }
+]
